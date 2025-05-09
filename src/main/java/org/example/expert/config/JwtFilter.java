@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class JwtFilter implements Filter {
 
     private final JwtUtil jwtUtil;
+    private final UserDetailsService userDetailsService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,10 +34,10 @@ public class JwtFilter implements Filter {
 
         String url = httpRequest.getRequestURI();
 
-        if (url.startsWith("/auth")) {
-            chain.doFilter(request, response);
-            return;
-        }
+//        if (url.startsWith("/auth")) {
+//            chain.doFilter(request, response);
+//            return;
+//        }
 
         String bearerJwt = httpRequest.getHeader("Authorization");
 
